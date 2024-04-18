@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 $memberID = $_POST['memberID'];
 
 // Delete member from the database
-$sql = "DELETE FROM Members WHERE memberID = ?";
+$sql = "DELETE FROM members WHERE memberID = ?";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $memberID);
