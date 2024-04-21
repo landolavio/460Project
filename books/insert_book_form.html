@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insert New Book</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Insert New Book</h1>
+    <form action="insert_book.php" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required><br><br>
+        
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre" required><br><br>
+        
+        <label for="availability">Availability:</label>
+        <select id="availability" name="availability" required>
+            <option value="available">Available</option>
+            <option value="checked out">Checked Out</option>
+        </select><br><br>
+        
+        <input type="submit" value="Insert Book">
+    </form>
+</body>
+</html>

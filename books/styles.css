@@ -1,0 +1,107 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+header {
+    background: #0D3B66; /* Deep blue */
+    color: #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav {
+    background: #FAF0CA; /* A subtle beige for contrast */
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav a {
+    color: #31263E; /* Dark purple */
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd; /* Light gray for subtlety */
+}
+
+th {
+    background-color: #014D4E; /* Deep teal */
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+button, input[type="submit"], input[type="button"] {
+    background-color: #8338EC; /* Deep purple */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+    background-color: #6F2DBD; /* A darker shade of purple */
+}
+
+footer {
+    background-color: #123123; /* Very dark green */
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    nav a {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
