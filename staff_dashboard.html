@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Librarian Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="members.html">Manage Members</a></li>
+                <li><a href="books.html">Manage Books</a></li>
+                <li><a href="checkouts.html">Manage Checkouts</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>About the Library Management System</h2>
+            <p>The local public library provides a plethora of books of different genres, authors, and reading levels. People in the community are able to register as library members. As members, people can check out books, keep track of due dates, and pay late fees if they miss those due dates.</p>
+            <p>The purpose of this project is to design a database where users can keep track of their data, and also where library staff can keep track of books and member activity.</p>
+        </section>
+        
+        <section>
+            <h2>Database Overview</h2>
+            <p>The database holds contact information (Name, Address, Number) of all members registered with the library. It also stores information on the books including their ID, title, author, genre, and availability status.</p>
+            <p>New members can register, while returning members can log in to view books and their availability status, as well as view their due dates or late fees.</p>
+        </section>
+        
+        <section>
+            <h2>Library Staff Functions</h2>
+            <p>Library staff can track book inventory, manage member activity, and process book checkouts. They can track due dates, send reminders for overdue books, manage book returns, update availability status, and calculate fines for late returns.</p>
+            <p>The checkout log table in the database includes the bookID, memberID, checkout date, due date, return date, and fees.</p>
+        </section>
+        
+        <section>
+            <h2>Expected Interactions</h2>
+            <ul>
+                <li>Catalog books with details such as title, author, genre, and availability status.</li>
+                <li>Register library members, including personal information and membership status.</li>
+                <li>Process book checkouts, track due dates, and send reminders for overdue books.</li>
+                <li>Manage book returns, update availability status, and calculate fines for late returns.</li>
+                <li>Generate reports on popular books, member activity, and overdue items.</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <!-- Add footer content as needed -->
+    </footer>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insert New Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Insert New Checkout</h1>
+    <li><a href="checkouts.html">Back</a></li>
+    <form action="insert_checkout.php" method="POST">
+        <label for="bookID">Book ID:</label>
+        <input type="text" id="bookID" name="bookID" required><br><br>
+        
+        <label for="memberID">Member ID:</label>
+        <input type="text" id="memberID" name="memberID" required><br><br>
+        
+        <label for="checkoutDate">Checkout Date:</label>
+        <input type="date" id="checkoutDate" name="checkoutDate" value="<?php echo date('Y-m-d'); ?>" disabled><br><br>
+        
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate" required><br><br>
+        
+        <label for="returnDate">Return Date:</label>
+        <input type="date" id="returnDate" name="returnDate" disabled><br><br>
+        
+        <label for="fees">Fees:</label>
+        <input type="number" id="fees" name="fees" step="0.01"><br><br>
+        
+        <input type="submit" value="Insert Checkout">
+    </form>
+</body>
+</html>

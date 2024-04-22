@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Checkouts</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                if (this.status == 200) {
+                    const response = JSON.parse(this.responseText);
+                    if (response.data && response.data.length > 0) {
+                        let tableHTML = "";
+                        response.data.forEach(function(checkout) {
+                            tableHTML += `<tr>
+                                            <td>${checkout.checkoutID}</td>
+                                            <td>${checkout.bookID}</td>
+                                            <td>${checkout.memberID}</td>
+                                            <td>${checkout.checkoutDate}</td>
+                                            <td>${checkout.dueDate}</td>
+                                            <td>${checkout.returnDate || 'N/A'}</td>
+                                            <td>${checkout.fees}</td>
+                                          </tr>`;
+                        });
+                        document.getElementById('checkoutsTable').innerHTML += tableHTML;
+                    } else {
+                        document.getElementById('checkoutsTable').innerHTML += `<tr><td colspan="7">No checkouts found</td></tr>`;
+                    }
+                }
+            };
+            xhttp.open("GET", "view_checkouts.php", true);
+            xhttp.send();
+        });
+    </script>
+</head>
+<body>
+    <li><a href="checkouts.html">Back</a></li>
+    <h1>Checkout List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Checkout ID</th>
+                <th>Book ID</th>
+                <th>Member ID</th>
+                <th>Checkout Date</th>
+                <th>Due Date</th>
+                <th>Return Date</th>
+                <th>Fees ($)</th>
+            </tr>
+        </thead>
+        <tbody id="checkoutsTable">
+            <!-- Checkout records will be loaded here via AJAX -->
+        </tbody>
+    </table>
+</body>
+</html>
