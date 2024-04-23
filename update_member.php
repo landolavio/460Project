@@ -13,22 +13,24 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get form data
-$memberID = $_POST['memberID'];
-$name = $_POST['name'];
-$address = $_POST['address'];
-$phoneNumber = $_POST['phoneNumber'];
-$status = $_POST['status'];
+// Validate and sanitize form data
+$memberID = isset($_POST['memberID']) ? intval($_POST['memberID']) : null;
+$name = isset($_POST['name']) ? $_POST['name'] : null;
+$address = isset($_POST['address']) ? $_POST['address'] : null;
+$phoneNumber = isset($_POST['phoneNumber']) ? $_POST['phoneNumber'] : null;
+$status = isset($_POST['status']) ? $_POST['status'] : null;
 
-// Update member information in the database
+// Prepare the SQL update query
 $sql = "UPDATE Members SET name = ?, address = ?, phoneNumber = ?, status = ? WHERE memberID = ?";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssssi", $name, $address, $phoneNumber, $status, $memberID);
 
+// Execute the query
 if ($stmt->execute()) {
     echo "Member information updated successfully!";
     header("Location: members.html");
+    exit(); // Ensure script execution stops after redirection
 } else {
     echo "Error updating member information: " . $stmt->error;
 }

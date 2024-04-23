@@ -13,13 +13,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get form data
-$bookID = $_POST['bookID'];
-$memberID = $_POST['memberID'];
-$checkoutDate = $_POST['checkoutDate'];
-$dueDate = $_POST['dueDate'];
+// Sanitize and validate form data
+$bookID = filter_var($_POST['bookID'], FILTER_SANITIZE_NUMBER_INT);
+$memberID = filter_var($_POST['memberID'], FILTER_SANITIZE_NUMBER_INT);
+$checkoutDate = filter_var($_POST['checkoutDate'], FILTER_SANITIZE_STRING);
+$dueDate = filter_var($_POST['dueDate'], FILTER_SANITIZE_STRING);
 $returnDate = null; // Default value for returnDate is null
-$fees = $_POST['fees'] ?? 0.00; // Optional field
+$fees = filter_var($_POST['fees'] ?? 0.00, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
 // Prepare and execute the SQL statement
 $sql = "INSERT INTO Checkouts (bookID, memberID, checkoutDate, dueDate, returnDate, fees) VALUES (?, ?, ?, ?, ?, ?)";
@@ -40,4 +40,3 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 ?>
-

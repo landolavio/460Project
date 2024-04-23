@@ -13,14 +13,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get form data
-$checkoutID = $_POST['checkoutID'];
-$bookID = $_POST['bookID'] ?? null;
-$memberID = $_POST['memberID'] ?? null;
-$checkoutDate = $_POST['checkoutDate'] ?? null;
-$dueDate = $_POST['dueDate'] ?? null;
-$returnDate = $_POST['returnDate'] ?? null;
-$fees = $_POST['fees'] ?? null;
+// Validate and sanitize form data
+$checkoutID = isset($_POST['checkoutID']) ? intval($_POST['checkoutID']) : null;
+$bookID = isset($_POST['bookID']) ? intval($_POST['bookID']) : null;
+$memberID = isset($_POST['memberID']) ? intval($_POST['memberID']) : null;
+$checkoutDate = isset($_POST['checkoutDate']) ? $_POST['checkoutDate'] : null;
+$dueDate = isset($_POST['dueDate']) ? $_POST['dueDate'] : null;
+$returnDate = isset($_POST['returnDate']) ? $_POST['returnDate'] : null;
+$fees = isset($_POST['fees']) ? floatval($_POST['fees']) : null;
 
 // Prepare the SQL update query
 $sql = "UPDATE Checkouts SET bookID = IFNULL(?, bookID), memberID = IFNULL(?, memberID), checkoutDate = IFNULL(?, checkoutDate), dueDate = IFNULL(?, dueDate), returnDate = IFNULL(?, returnDate), fees = IFNULL(?, fees) WHERE checkoutID = ?";
@@ -32,6 +32,7 @@ $stmt->bind_param("iisssdi", $bookID, $memberID, $checkoutDate, $dueDate, $retur
 if ($stmt->execute()) {
     echo "Checkout record updated successfully!";
     header("Location: checkouts.html");
+    exit(); // Ensure script execution stops after redirection
 } else {
     echo "Error updating checkout record: " . $stmt->error;
 }

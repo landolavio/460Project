@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "LibraryDB";
+$database = "librarydb";
 
 // Create a connection to the database
 $conn = new mysqli($servername, $username, $password, $database);
@@ -18,29 +18,18 @@ $sql = "SELECT checkoutID, bookID, memberID, checkoutDate, dueDate, returnDate, 
 
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    // Output table header
-    echo "<h2>Overdue Checkouts</h2>";
-    echo "<table border='1'>";
-    echo "<tr><th>Checkout ID</th><th>Book ID</th><th>Member ID</th><th>Checkout Date</th><th>Due Date</th><th>Return Date</th><th>Fees</th></tr>";
+$overdueCheckouts = [];
 
-    // Output data of each row
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row["checkoutID"] . "</td>";
-        echo "<td>" . $row["bookID"] . "</td>";
-        echo "<td>" . $row["memberID"] . "</td>";
-        echo "<td>" . $row["checkoutDate"] . "</td>";
-        echo "<td>" . $row["dueDate"] . "</td>";
-        echo "<td>" . $row["returnDate"] . "</td>";
-        echo "<td>" . $row["fees"] . "</td>";
-        echo "</tr>";
+        $overdueCheckouts[] = $row;
     }
-    echo "</table>";
-} else {
-    echo "No overdue checkouts found.";
 }
 
 // Close the database connection
 $conn->close();
+
+// Output the data as JSON
+header('Content-Type: application/json');
+echo json_encode(['data' => $overdueCheckouts]);
 ?>

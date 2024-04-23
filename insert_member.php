@@ -15,11 +15,11 @@ if ($conn->connect_error) {
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
-    $name = $_POST["name"];
-    $address = $_POST["address"];
-    $phone = $_POST["phone"];
-    $registration_date = $_POST["registration_date"];
+    // Sanitize and validate form data
+    $name = filter_var($_POST["name"], FILTER_SANITIZE_STRING);
+    $address = filter_var($_POST["address"], FILTER_SANITIZE_STRING);
+    $phone = filter_var($_POST["phone"], FILTER_SANITIZE_STRING);
+    $registration_date = $_POST["registration_date"]; // No need to sanitize as it's a date
 
     // Prepare the INSERT query
     $stmt = $conn->prepare("INSERT INTO Members (name, address, phoneNumber, registrationDate) VALUES (?, ?, ?, ?)");
@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute()) {
         echo "New member inserted successfully!";
         header("Location: members.html");
+        exit(); // Ensure script execution stops after redirection
     } else {
         echo "Error: " . $stmt->error;
     }

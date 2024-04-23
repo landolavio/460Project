@@ -13,12 +13,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get form data
-$bookID = $_POST['bookID'];
-$title = $_POST['title'];
-$author = $_POST['author'];
-$genre = $_POST['genre'];
-$availability = $_POST['availability'];
+// Validate and sanitize form data
+$bookID = isset($_POST['bookID']) ? intval($_POST['bookID']) : null;
+$title = isset($_POST['title']) ? trim($_POST['title']) : null;
+$author = isset($_POST['author']) ? trim($_POST['author']) : null;
+$genre = isset($_POST['genre']) ? trim($_POST['genre']) : null;
+$availability = isset($_POST['availability']) ? trim($_POST['availability']) : null;
 
 // Prepare the SQL update query
 $sql = "UPDATE Books SET title = IFNULL(?, title), author = IFNULL(?, author), genre = IFNULL(?, genre), availability = IFNULL(?, availability) WHERE bookID = ?";
@@ -30,6 +30,7 @@ $stmt->bind_param("ssssi", $title, $author, $genre, $availability, $bookID);
 if ($stmt->execute()) {
     echo "Book updated successfully!";
     header("Location: books.html");
+    exit(); // Ensure script execution stops after redirection
 } else {
     echo "Error updating book: " . $stmt->error;
 }

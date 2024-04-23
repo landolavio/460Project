@@ -13,11 +13,22 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get form data
-$title = $_POST['title'];
-$author = $_POST['author'];
-$genre = $_POST['genre'];
-$availability = $_POST['availability'];
+// Function to sanitize input
+function sanitize_input($data) {
+    // Remove leading and trailing whitespace
+    $data = trim($data);
+    // Remove HTML and PHP tags
+    $data = strip_tags($data);
+    // Escape special characters to prevent SQL injection
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+// Get and sanitize form data
+$title = sanitize_input($_POST['title']);
+$author = sanitize_input($_POST['author']);
+$genre = sanitize_input($_POST['genre']);
+$availability = sanitize_input($_POST['availability']);
 
 // Prepare and execute the SQL statement
 $sql = "INSERT INTO Books (title, author, genre, availability) VALUES (?, ?, ?, ?)";
